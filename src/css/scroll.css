@@ -1,0 +1,22 @@
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  font-size: 18px;
+  background: #4e75ff;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  opacity: 0; /* Початково невидима */
+  pointer-events: none; /* Щоб не можна було клікнути, коли невидима */
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.scroll-to-top-btn:hover,
+.scroll-to-top-btn:focus {
+  background-color: #6c8cff;
+}
