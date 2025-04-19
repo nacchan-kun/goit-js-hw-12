@@ -9,15 +9,7 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-const galleryContainer = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more');
-const loader = document.querySelector('.loader');
-
-let lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
-
+// Create gallery card markup
 export const createGalleryCardTemplate = cardsArr =>
   cardsArr
     .map(
@@ -33,7 +25,7 @@ export const createGalleryCardTemplate = cardsArr =>
 <li class="gallery-card">
   <a href="${largeImageURL}">
     <div class="card-top-part">
-      <img class="card-img" src="${webformatURL}" alt="${tags}" loading="lazy"/>
+      <img class="card-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
     </div>
     <ul class="card-bottom-part">
       <li class="card-bottom-wrapper">
@@ -59,34 +51,34 @@ export const createGalleryCardTemplate = cardsArr =>
     )
     .join('');
 
-// ✅ Render cards to DOM in one operation
-export const renderGallery = cardsArr => {
-  const markup = createGalleryCardTemplate(cardsArr);
-  galleryContainer.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh(); // ✅ update SimpleLightbox
-};
+// Lightbox instance (singleton)
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
-// ✅ Clear the gallery
-export const clearGallery = () => {
-  galleryContainer.innerHTML = '';
-};
+// Render gallery cards to DOM
+export function renderGallery(cards) {
+  const gallery = document.querySelector('.gallery');
+  const markup = createGalleryCardTemplate(cards);
+  gallery.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh(); // Re-initialize for new elements
+}
 
-// ✅ Show loader
-export const showLoader = () => {
-  loader.classList.remove('is-hidden');
-};
+// Clear gallery
+export function clearGallery() {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
+}
 
-// ✅ Hide loader
-export const hideLoader = () => {
-  loader.classList.add('is-hidden');
-};
+// Toggle loader visibility
+export function toggleLoader(show) {
+  const loader = document.querySelector('.loader');
+  loader.classList.toggle('hidden', !show);
+}
 
-// ✅ Show "Load more" button
-export const showLoadMoreBtn = () => {
-  loadMoreBtn.classList.remove('is-hidden');
-};
-
-// ✅ Hide "Load more" button
-export const hideLoadMoreBtn = () => {
-  loadMoreBtn.classList.add('is-hidden');
-};
+// Toggle "Load more" button visibility
+export function toggleLoadMoreBtn(show) {
+  const loadMoreBtn = document.querySelector('.load-more');
+  loadMoreBtn.classList.toggle('hidden', !show);
+}
