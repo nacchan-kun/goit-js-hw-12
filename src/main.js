@@ -19,6 +19,7 @@ const loaderEl = document.querySelector('.loader');
 const loadMoreBtnEl = document.querySelector('.load-more');
 
 const scrollBtnEl = document.querySelector('.scroll-to-top-btn');
+loadMoreBtnEl.classList.add('hidden');
 
 let searchedQuery;
 let searchedPage;

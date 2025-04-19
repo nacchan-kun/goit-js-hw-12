@@ -6,6 +6,18 @@
 // comments — кількість коментарів
 // downloads — кількість завантажень
 
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const galleryContainer = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
+const loader = document.querySelector('.loader');
+
+let lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
 export const createGalleryCardTemplate = cardsArr =>
   cardsArr
     .map(
@@ -21,7 +33,7 @@ export const createGalleryCardTemplate = cardsArr =>
 <li class="gallery-card">
   <a href="${largeImageURL}">
     <div class="card-top-part">
-      <img class="card-img" src="${webformatURL}" alt="${tags}" />
+      <img class="card-img" src="${webformatURL}" alt="${tags}" loading="lazy"/>
     </div>
     <ul class="card-bottom-part">
       <li class="card-bottom-wrapper">
@@ -46,3 +58,35 @@ export const createGalleryCardTemplate = cardsArr =>
 `
     )
     .join('');
+
+// ✅ Render cards to DOM in one operation
+export const renderGallery = cardsArr => {
+  const markup = createGalleryCardTemplate(cardsArr);
+  galleryContainer.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh(); // ✅ update SimpleLightbox
+};
+
+// ✅ Clear the gallery
+export const clearGallery = () => {
+  galleryContainer.innerHTML = '';
+};
+
+// ✅ Show loader
+export const showLoader = () => {
+  loader.classList.remove('is-hidden');
+};
+
+// ✅ Hide loader
+export const hideLoader = () => {
+  loader.classList.add('is-hidden');
+};
+
+// ✅ Show "Load more" button
+export const showLoadMoreBtn = () => {
+  loadMoreBtn.classList.remove('is-hidden');
+};
+
+// ✅ Hide "Load more" button
+export const hideLoadMoreBtn = () => {
+  loadMoreBtn.classList.add('is-hidden');
+};
