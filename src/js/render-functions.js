@@ -6,10 +6,6 @@
 // comments — кількість коментарів
 // downloads — кількість завантажень
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-// Create gallery card markup
 export const createGalleryCardTemplate = cardsArr =>
   cardsArr
     .map(
@@ -25,7 +21,7 @@ export const createGalleryCardTemplate = cardsArr =>
 <li class="gallery-card">
   <a href="${largeImageURL}">
     <div class="card-top-part">
-      <img class="card-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
+      <img class="card-img" src="${webformatURL}" alt="${tags}" />
     </div>
     <ul class="card-bottom-part">
       <li class="card-bottom-wrapper">
@@ -50,35 +46,3 @@ export const createGalleryCardTemplate = cardsArr =>
 `
     )
     .join('');
-
-// Lightbox instance (singleton)
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
-
-// Render gallery cards to DOM
-export function renderGallery(cards) {
-  const gallery = document.querySelector('.gallery');
-  const markup = createGalleryCardTemplate(cards);
-  gallery.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh(); // Re-initialize for new elements
-}
-
-// Clear gallery
-export function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
-}
-
-// Toggle loader visibility
-export function toggleLoader(show) {
-  const loader = document.querySelector('.loader');
-  loader.classList.toggle('hidden', !show);
-}
-
-// Toggle "Load more" button visibility
-export function toggleLoadMoreBtn(show) {
-  const loadMoreBtn = document.querySelector('.load-more');
-  loadMoreBtn.classList.toggle('hidden', !show);
-}

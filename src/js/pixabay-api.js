@@ -1,8 +1,4 @@
-
-
 import axios from 'axios';
-
-axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 export const fetchPhotos = async (
   searchedQuery,
@@ -21,6 +17,7 @@ export const fetchPhotos = async (
     },
   };
 
-  const response = await axios.get('', axiosOptions);
-  return response.data; // ✅ only return the data object
+  axios.defaults.baseURL = 'https://pixabay.com/api/';
+
+  return await axios.get('', axiosOptions);
 };

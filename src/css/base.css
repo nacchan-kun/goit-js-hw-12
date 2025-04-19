@@ -19,9 +19,12 @@
 body {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100vh;
+  width: 100%; /* Виправлено з min-width */
+  height: 100vh; /* Можна використовувати без min-height */
   margin: 0;
+
+  /* overflow-x: hidden; */
+  /* Додано, щоб уникнути горизонтального скролу */
 }
 
 main {

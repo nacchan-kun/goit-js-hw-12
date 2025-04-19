@@ -4,7 +4,7 @@ import iziToast from 'izitoast';
 import SimpleLightbox from 'simplelightbox';
 // import "simplelightbox/dist/simple-lightbox.min.css";
 
-import bellIcon from '/img/izi-toast-svg/bell-icon.svg';
+import bellIcon from './img/izi-toast-svg/bell-icon.svg';
 import successIcon from '/img/izi-toast-svg/success-icon.svg';
 import infoIcon from '/img/izi-toast-svg/info-icon.svg';
 import errorIcon from '/img/izi-toast-svg/error-icon.svg';
@@ -19,7 +19,6 @@ const loaderEl = document.querySelector('.loader');
 const loadMoreBtnEl = document.querySelector('.load-more');
 
 const scrollBtnEl = document.querySelector('.scroll-to-top-btn');
-loadMoreBtnEl.classList.add('hidden');
 
 let searchedQuery;
 let searchedPage;
@@ -224,3 +223,4 @@ window.addEventListener('scroll', () => {
 scrollBtnEl.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
